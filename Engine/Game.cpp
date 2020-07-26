@@ -39,8 +39,9 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	Rect(20, 20, 20, 20, 255, 255, 255);
-
+	Rectangle(20, 20, 20, 20, 255, 255, 255);
+	moveBox();
+	
 }
 
 void Game::ComposeFrame()
@@ -48,13 +49,54 @@ void Game::ComposeFrame()
 	
 }
 
-void Game::Rect(int x0, int x1, int y0, int y1, int r, int g, int b)
+void Game::Rectangle(int x0, int x1, int y0, int y1, int r, int g, int b)
 {
 	for (x0 = 0; x0 < x1; ++x0)
 	{
 		for (y0 = 0; y0 < y1; ++y0)
 		{
-			gfx.PutPixel(x + x0 , y + y0, 255, 255, 255);
+			if ( x + x0 < 0 ) 
+			{
+				x = 0;
+				x0 = 0; 
+			}
+			else if ( x + x1 > Graphics::ScreenWidth) 
+			{
+				x = Graphics::ScreenWidth - x1;
+			}
+			else if ( y + y0 < 0)
+			{
+				y = 0;
+				y0 = 0;
+			}
+			else if ( y + y1 > Graphics::ScreenHeight )
+			{
+				y = Graphics::ScreenHeight - y1;
+			}
+			gfx.PutPixel( x + x0 , y + y0, 255, 255, 255);
 		}
 	}
+}
+
+void Game:: moveBox()
+{
+	if (wnd.kbd.KeyIsPressed( VK_UP ) || wnd.kbd.KeyIsPressed( 0x57 ))
+	{
+		y += -1;
+	}
+	if (wnd.kbd.KeyIsPressed( VK_DOWN ) || wnd.kbd.KeyIsPressed( 0x53 ))
+	{
+		y += 1;
+	}if (wnd.kbd.KeyIsPressed( VK_LEFT ) || wnd.kbd.KeyIsPressed( 0x41 ))
+	{
+		x += -1;
+	}if (wnd.kbd.KeyIsPressed( VK_RIGHT ) || wnd.kbd.KeyIsPressed( 0x44 ))
+	{
+		x += 1;
+	}
+}
+
+void Game::constrainBox()
+{
+	
 }

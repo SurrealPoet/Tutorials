@@ -37,7 +37,10 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
-	void Rect(int x0, int x1, int y0, int y1, int r, int g, int b);
+	void Rectangle(int x0, int x1, int y0, int y1, int r, int g, int b);
+	void Game::moveBox();
+	void Game::constrainBox();
+
 
 private:
 	MainWindow& wnd;
@@ -47,4 +50,6 @@ private:
 	/********************************/
 	int x = 200;
 	int y = 200;
+	//int xpos = x + x0;
+	//int ypos = y + y0;
 };
