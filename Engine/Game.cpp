@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include "Graphics.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -38,9 +39,22 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	//test;
+	Rect(20, 20, 20, 20, 255, 255, 255);
+
 }
 
 void Game::ComposeFrame()
 {
+	
+}
+
+void Game::Rect(int x0, int x1, int y0, int y1, int r, int g, int b)
+{
+	for (x0 = 0; x0 < x1; ++x0)
+	{
+		for (y0 = 0; y0 < y1; ++y0)
+		{
+			gfx.PutPixel(x + x0 , y + y0, 255, 255, 255);
+		}
+	}
 }

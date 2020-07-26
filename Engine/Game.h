@@ -37,10 +37,14 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
+	void Rect(int x0, int x1, int y0, int y1, int r, int g, int b);
+
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	int x = 200;
+	int y = 200;
 };
