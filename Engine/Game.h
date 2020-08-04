@@ -39,7 +39,7 @@ private:
 	/********************************/
 	void Rectangle(int x0, int x1, int y0, int y1, int r, int g, int b);
 	void Game::moveBox();
-	void Game::constrainBox();
+	void Game::crossHairs( int crossX, int crossY );
 
 
 private:
@@ -50,6 +50,8 @@ private:
 	/********************************/
 	int x = 200;
 	int y = 200;
+	int crossX = 0;
+	int crossY = 0;
 	//int xpos = x + x0;
 	//int ypos = y + y0;
 };

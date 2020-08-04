@@ -21,6 +21,7 @@
 #include "MainWindow.h"
 #include "Game.h"
 #include "Graphics.h"
+#include "Mouse.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -39,14 +40,14 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	Rectangle(20, 20, 20, 20, 255, 255, 255);
 	moveBox();
 	
 }
 
 void Game::ComposeFrame()
 {
-	
+	crossHairs(400, 300);
+	Rectangle(20, 20, 20, 20, 255, 255, 255);
 }
 
 void Game::Rectangle(int x0, int x1, int y0, int y1, int r, int g, int b)
@@ -55,24 +56,6 @@ void Game::Rectangle(int x0, int x1, int y0, int y1, int r, int g, int b)
 	{
 		for (y0 = 0; y0 < y1; ++y0)
 		{
-			if ( x + x0 < 0 ) 
-			{
-				x = 0;
-				x0 = 0; 
-			}
-			else if ( x + x1 > Graphics::ScreenWidth) 
-			{
-				x = Graphics::ScreenWidth - x1;
-			}
-			else if ( y + y0 < 0)
-			{
-				y = 0;
-				y0 = 0;
-			}
-			else if ( y + y1 > Graphics::ScreenHeight )
-			{
-				y = Graphics::ScreenHeight - y1;
-			}
 			gfx.PutPixel( x + x0 , y + y0, 255, 255, 255);
 		}
 	}
@@ -94,9 +77,36 @@ void Game:: moveBox()
 	{
 		x += 1;
 	}
+	if (x < 0)
+	{
+		x = 0;
+	}
+	if (x + 20 > Graphics::ScreenWidth)
+	{
+		x = Graphics::ScreenWidth - 20;
+	}
+	if (y < 0)
+	{
+		y = 0;
+	}
+	if (y + 20 > Graphics::ScreenHeight)
+	{
+		y = Graphics::ScreenHeight - 20;
+	}
 }
 
-void Game::constrainBox()
+void Game::crossHairs( int crossX, int crossY )
 {
-	
+	gfx.PutPixel(crossX + 1, crossY, 255, 255, 255);
+	gfx.PutPixel(crossX + 2, crossY, 255, 255, 255);
+	gfx.PutPixel(crossX + 3, crossY, 255, 255, 255);
+	gfx.PutPixel(crossX - 1, crossY, 255, 255, 255);
+	gfx.PutPixel(crossX - 2, crossY, 255, 255, 255);
+	gfx.PutPixel(crossX - 3, crossY, 255, 255, 255);
+	gfx.PutPixel(crossX, crossY + 1, 255, 255, 255);
+	gfx.PutPixel(crossX, crossY + 2, 255, 255, 255);
+	gfx.PutPixel(crossX, crossY + 3, 255, 255, 255);
+	gfx.PutPixel(crossX, crossY - 1, 255, 255, 255);
+	gfx.PutPixel(crossX, crossY - 2, 255, 255, 255);
+	gfx.PutPixel(crossX, crossY - 3, 255, 255, 255);
 }
